@@ -1,7 +1,8 @@
-const User = require('../data/database').User; // Importing the User model
+const User = require('../models/user'); // Importing the User model
 
 // GET all users
 const getAllUsers = async (req, res) => {
+    console.log('getAllUsers called'); // Log when the function is called
     try {
         const users = await User.find();
         res.status(200).json(users);
@@ -21,6 +22,7 @@ const getAllUsers = async (req, res) => {
  *         description: A list of users
  */
 const getUserById = async (req, res) => {
+    console.log('getUserById called'); // Log when the function is called
     try {
         const user = await User.findById(req.params.id);
         if (!user) return res.status(404).json({ message: 'User not found' });
@@ -41,6 +43,7 @@ const getUserById = async (req, res) => {
  *         description: User created
  */
 const createUser = async (req, res) => {
+    console.log('createUser called'); // Log when the function is called
     const user = new User(req.body);
     try {
         const savedUser = await user.save();
@@ -68,6 +71,7 @@ const createUser = async (req, res) => {
  *         description: User not found
  */
 const updateUser = async (req, res) => {
+    console.log('updateUser called'); // Log when the function is called
     try {
         const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, { new: true });
         if (!updatedUser) return res.status(404).json({ message: 'User not found' });
@@ -95,6 +99,7 @@ const updateUser = async (req, res) => {
  *         description: User not found
  */
 const deleteUser = async (req, res) => {
+    console.log('deleteUser called'); // Log when the function is called
     try {
         const deletedUser = await User.findByIdAndDelete(req.params.id);
         if (!deletedUser) return res.status(404).json({ message: 'User not found' });
