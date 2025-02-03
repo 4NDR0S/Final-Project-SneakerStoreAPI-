@@ -1,4 +1,4 @@
-const User = require('../data/database').User; // Assuming you have a User model
+const User = require('../data/database').User; // Importing the User model
 
 // GET all users
 const getAllUsers = async (req, res) => {
@@ -10,7 +10,16 @@ const getAllUsers = async (req, res) => {
     }
 };
 
-// GET a single user by ID
+/**
+ * @swagger
+ * /api/users:
+ *   get:
+ *     summary: Get all users
+ *     tags: [Users]
+ *     responses:
+ *       200:
+ *         description: A list of users
+ */
 const getUserById = async (req, res) => {
     try {
         const user = await User.findById(req.params.id);
@@ -21,7 +30,16 @@ const getUserById = async (req, res) => {
     }
 };
 
-// POST a new user
+/**
+ * @swagger
+ * /api/users:
+ *   post:
+ *     summary: Create a new user
+ *     tags: [Users]
+ *     responses:
+ *       201:
+ *         description: User created
+ */
 const createUser = async (req, res) => {
     const user = new User(req.body);
     try {
@@ -32,7 +50,23 @@ const createUser = async (req, res) => {
     }
 };
 
-// PUT to update a user by ID
+/**
+ * @swagger
+ * /api/users/{id}:
+ *   put:
+ *     summary: Update a user by ID
+ *     tags: [Users]
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: ID of the user to update
+ *     responses:
+ *       200:
+ *         description: User updated
+ *       404:
+ *         description: User not found
+ */
 const updateUser = async (req, res) => {
     try {
         const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, { new: true });
@@ -43,7 +77,23 @@ const updateUser = async (req, res) => {
     }
 };
 
-// DELETE a user by ID
+/**
+ * @swagger
+ * /api/users/{id}:
+ *   delete:
+ *     summary: Delete a user by ID
+ *     tags: [Users]
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: ID of the user to delete
+ *     responses:
+ *       204:
+ *         description: User deleted
+ *       404:
+ *         description: User not found
+ */
 const deleteUser = async (req, res) => {
     try {
         const deletedUser = await User.findByIdAndDelete(req.params.id);

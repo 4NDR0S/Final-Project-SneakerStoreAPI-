@@ -1,4 +1,4 @@
-const Sneaker = require('../data/database').Sneaker; // Assuming you have a Sneaker model
+const Sneaker = require('../data/database').Sneaker; // Importing the Sneaker model
 
 // GET all sneakers
 const getAllSneakers = async (req, res) => {
@@ -10,7 +10,16 @@ const getAllSneakers = async (req, res) => {
     }
 };
 
-// GET a single sneaker by ID
+/**
+ * @swagger
+ * /api/sneakers:
+ *   get:
+ *     summary: Get all sneakers
+ *     tags: [Sneakers]
+ *     responses:
+ *       200:
+ *         description: A list of sneakers
+ */
 const getSneakerById = async (req, res) => {
     try {
         const sneaker = await Sneaker.findById(req.params.id);
@@ -21,7 +30,16 @@ const getSneakerById = async (req, res) => {
     }
 };
 
-// POST a new sneaker
+/**
+ * @swagger
+ * /api/sneakers:
+ *   post:
+ *     summary: Create a new sneaker
+ *     tags: [Sneakers]
+ *     responses:
+ *       201:
+ *         description: Sneaker created
+ */
 const createSneaker = async (req, res) => {
     const sneaker = new Sneaker(req.body);
     try {
@@ -32,7 +50,23 @@ const createSneaker = async (req, res) => {
     }
 };
 
-// PUT to update a sneaker by ID
+/**
+ * @swagger
+ * /api/sneakers/{id}:
+ *   put:
+ *     summary: Update a sneaker by ID
+ *     tags: [Sneakers]
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: ID of the sneaker to update
+ *     responses:
+ *       200:
+ *         description: Sneaker updated
+ *       404:
+ *         description: Sneaker not found
+ */
 const updateSneaker = async (req, res) => {
     try {
         const updatedSneaker = await Sneaker.findByIdAndUpdate(req.params.id, req.body, { new: true });
@@ -43,7 +77,23 @@ const updateSneaker = async (req, res) => {
     }
 };
 
-// DELETE a sneaker by ID
+/**
+ * @swagger
+ * /api/sneakers/{id}:
+ *   delete:
+ *     summary: Delete a sneaker by ID
+ *     tags: [Sneakers]
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: ID of the sneaker to delete
+ *     responses:
+ *       204:
+ *         description: Sneaker deleted
+ *       404:
+ *         description: Sneaker not found
+ */
 const deleteSneaker = async (req, res) => {
     try {
         const deletedSneaker = await Sneaker.findByIdAndDelete(req.params.id);

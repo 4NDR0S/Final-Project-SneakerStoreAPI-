@@ -37,6 +37,42 @@ const {
  *         description: Sneaker created
  */
 
+/**
+ * @swagger
+ * /api/sneakers/{id}:
+ *   put:
+ *     summary: Update a sneaker by ID
+ *     tags: [Sneakers]
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: ID of the sneaker to update
+ *     responses:
+ *       200:
+ *         description: Sneaker updated
+ *       404:
+ *         description: Sneaker not found
+ */
+
+/**
+ * @swagger
+ * /api/sneakers/{id}:
+ *   delete:
+ *     summary: Delete a sneaker by ID
+ *     tags: [Sneakers]
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: ID of the sneaker to delete
+ *     responses:
+ *       204:
+ *         description: Sneaker deleted
+ *       404:
+ *         description: Sneaker not found
+ */
+
 router.get('/', getAllSneakers);
 router.get('/:id', getSneakerById);
 router.post('/', createSneaker);

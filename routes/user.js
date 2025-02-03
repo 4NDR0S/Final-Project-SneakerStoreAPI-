@@ -37,6 +37,42 @@ const {
  *         description: User created
  */
 
+/**
+ * @swagger
+ * /api/users/{id}:
+ *   put:
+ *     summary: Update a user by ID
+ *     tags: [Users]
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: ID of the user to update
+ *     responses:
+ *       200:
+ *         description: User updated
+ *       404:
+ *         description: User not found
+ */
+
+/**
+ * @swagger
+ * /api/users/{id}:
+ *   delete:
+ *     summary: Delete a user by ID
+ *     tags: [Users]
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: ID of the user to delete
+ *     responses:
+ *       204:
+ *         description: User deleted
+ *       404:
+ *         description: User not found
+ */
+
 router.get('/', getAllUsers);
 router.get('/:id', getUserById);
 router.post('/', createUser);

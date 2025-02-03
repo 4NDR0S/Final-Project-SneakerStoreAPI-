@@ -151,7 +151,7 @@
         }
       }
     },
-    "/api/orders": {
+    "/api/order": {
       "get": {
         "summary": "Get all orders",
         "responses": {
@@ -228,7 +228,7 @@
         }
       }
     },
-    "/api/orders/{id}": {
+    "/api/order/{id}": {
       "get": {
         "summary": "Get an order by ID",
         "parameters": [
@@ -327,7 +327,7 @@
         }
       }
     },
-    "/api/sneakers": {
+    "/api/sneaker": {
       "get": {
         "summary": "Get all sneakers",
         "responses": {
@@ -404,7 +404,7 @@
         }
       }
     },
-    "/api/sneakers/{id}": {
+    "/api/sneaker/{id}": {
       "get": {
         "summary": "Get a sneaker by ID",
         "parameters": [
@@ -503,7 +503,7 @@
         }
       }
     },
-    "/api/users": {
+    "/api/user": {
       "get": {
         "summary": "Get all users",
         "responses": {
@@ -574,7 +574,7 @@
         }
       }
     },
-    "/api/users/{id}": {
+    "/api/user/{id}": {
       "get": {
         "summary": "Get a user by ID",
         "parameters": [
