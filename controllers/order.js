@@ -1,18 +1,8 @@
-const Order = require('../data/database').Order; // Importing the Order model
+const mongoose = require('mongoose');
+const Order = require('../models/order'); // Importing the Order model
 
-
-/**
- * @swagger
- * /api/order:
- *   get:
- *     summary: Get all orders
- *     tags: [Orders]
- *     responses:
- *       200:
- *         description: A list of orders
- */
+// GET all orders
 const getAllOrders = async (req, res) => {
-
     try {
         const orders = await Order.find();
         res.status(200).json(orders);
@@ -23,24 +13,18 @@ const getAllOrders = async (req, res) => {
 
 /**
  * @swagger
- * /api/order/{id}:
+ * /api/orders:
  *   get:
- *     summary: Get an order by ID
- *     parameters:
- *       - name: id
- *         in: path
- *         required: true
- *         description: ID of the order to retrieve
+ *     summary: Get all orders
+ *     tags: [Orders]
  *     responses:
  *       200:
- *         description: Order found
- *       404:
- *         description: Order not found
+ *         description: A list of orders
  */
 const getOrderById = async (req, res) => {
-
     try {
-        const order = await Order.findById(req.params.id);
+        const orderId = mongoose.Types.ObjectId(req.params.id); // Convert to ObjectId
+        const order = await Order.findById(orderId);
         if (!order) return res.status(404).json({ message: 'Order not found' });
         res.status(200).json(order);
     } catch (error) {
@@ -50,7 +34,7 @@ const getOrderById = async (req, res) => {
 
 /**
  * @swagger
- * /api/order:
+ * /api/orders:
  *   post:
  *     summary: Create a new order
  *     tags: [Orders]
@@ -59,7 +43,6 @@ const getOrderById = async (req, res) => {
  *         description: Order created
  */
 const createOrder = async (req, res) => {
-
     const order = new Order(req.body);
     try {
         const savedOrder = await order.save();
@@ -71,7 +54,7 @@ const createOrder = async (req, res) => {
 
 /**
  * @swagger
- * /api/order/{id}:
+ * /api/orders/{id}:
  *   put:
  *     summary: Update an order by ID
  *     tags: [Orders]
@@ -87,9 +70,9 @@ const createOrder = async (req, res) => {
  *         description: Order not found
  */
 const updateOrder = async (req, res) => {
-
     try {
-        const updatedOrder = await Order.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        const orderId = mongoose.Types.ObjectId(req.params.id); // Convert to ObjectId
+        const updatedOrder = await Order.findByIdAndUpdate(orderId, req.body, { new: true });
         if (!updatedOrder) return res.status(404).json({ message: 'Order not found' });
         res.status(200).json(updatedOrder);
     } catch (error) {
@@ -99,7 +82,7 @@ const updateOrder = async (req, res) => {
 
 /**
  * @swagger
- * /api/order/{id}:
+ * /api/orders/{id}:
  *   delete:
  *     summary: Delete an order by ID
  *     tags: [Orders]
@@ -115,9 +98,9 @@ const updateOrder = async (req, res) => {
  *         description: Order not found
  */
 const deleteOrder = async (req, res) => {
-
     try {
-        const deletedOrder = await Order.findByIdAndDelete(req.params.id);
+        const orderId = mongoose.Types.ObjectId(req.params.id); // Convert to ObjectId
+        const deletedOrder = await Order.findByIdAndDelete(orderId);
         if (!deletedOrder) return res.status(404).json({ message: 'Order not found' });
         res.status(204).send();
     } catch (error) {

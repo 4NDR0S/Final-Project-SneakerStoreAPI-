@@ -1,4 +1,5 @@
-const Sneaker = require('../data/database').Sneaker; // Importing the Sneaker model
+const mongoose = require('mongoose');
+const Sneaker = require('../models/sneaker'); // Importing the Sneaker model
 
 // GET all sneakers
 const getAllSneakers = async (req, res) => {
@@ -12,7 +13,7 @@ const getAllSneakers = async (req, res) => {
 
 /**
  * @swagger
- * /api/sneaker:
+ * /api/sneakers:
  *   get:
  *     summary: Get all sneakers
  *     tags: [Sneakers]
@@ -22,7 +23,8 @@ const getAllSneakers = async (req, res) => {
  */
 const getSneakerById = async (req, res) => {
     try {
-        const sneaker = await Sneaker.findById(req.params.id);
+        const sneakerId = mongoose.Types.ObjectId(req.params.id); // Convert to ObjectId
+        const sneaker = await Sneaker.findById(sneakerId);
         if (!sneaker) return res.status(404).json({ message: 'Sneaker not found' });
         res.status(200).json(sneaker);
     } catch (error) {
@@ -32,7 +34,7 @@ const getSneakerById = async (req, res) => {
 
 /**
  * @swagger
- * /api/sneaker:
+ * /api/sneakers:
  *   post:
  *     summary: Create a new sneaker
  *     tags: [Sneakers]
@@ -52,7 +54,7 @@ const createSneaker = async (req, res) => {
 
 /**
  * @swagger
- * /api/sneaker/{id}:
+ * /api/sneakers/{id}:
  *   put:
  *     summary: Update a sneaker by ID
  *     tags: [Sneakers]
@@ -69,7 +71,8 @@ const createSneaker = async (req, res) => {
  */
 const updateSneaker = async (req, res) => {
     try {
-        const updatedSneaker = await Sneaker.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        const sneakerId = mongoose.Types.ObjectId(req.params.id); // Convert to ObjectId
+        const updatedSneaker = await Sneaker.findByIdAndUpdate(sneakerId, req.body, { new: true });
         if (!updatedSneaker) return res.status(404).json({ message: 'Sneaker not found' });
         res.status(200).json(updatedSneaker);
     } catch (error) {
@@ -79,7 +82,7 @@ const updateSneaker = async (req, res) => {
 
 /**
  * @swagger
- * /api/sneaker/{id}:
+ * /api/sneakers/{id}:
  *   delete:
  *     summary: Delete a sneaker by ID
  *     tags: [Sneakers]
@@ -96,7 +99,8 @@ const updateSneaker = async (req, res) => {
  */
 const deleteSneaker = async (req, res) => {
     try {
-        const deletedSneaker = await Sneaker.findByIdAndDelete(req.params.id);
+        const sneakerId = mongoose.Types.ObjectId(req.params.id); // Convert to ObjectId
+        const deletedSneaker = await Sneaker.findByIdAndDelete(sneakerId);
         if (!deletedSneaker) return res.status(404).json({ message: 'Sneaker not found' });
         res.status(204).send();
     } catch (error) {

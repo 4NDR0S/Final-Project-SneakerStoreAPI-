@@ -1,4 +1,5 @@
-const Category = require('../data/database').Category; // Assuming you have a Category model
+const mongoose = require('mongoose');
+const Category = require('../models/category'); // Importing the Category model
 
 // GET all categories
 const getAllCategories = async (req, res) => {
@@ -13,7 +14,8 @@ const getAllCategories = async (req, res) => {
 // GET a single category by ID
 const getCategoryById = async (req, res) => {
     try {
-        const category = await Category.findById(req.params.id);
+        const categoryId = mongoose.Types.ObjectId(req.params.id); // Convert to ObjectId
+        const category = await Category.findById(categoryId);
         if (!category) return res.status(404).json({ message: 'Category not found' });
         res.status(200).json(category);
     } catch (error) {
@@ -35,7 +37,8 @@ const createCategory = async (req, res) => {
 // PUT to update a category by ID
 const updateCategory = async (req, res) => {
     try {
-        const updatedCategory = await Category.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        const categoryId = mongoose.Types.ObjectId(req.params.id); // Convert to ObjectId
+        const updatedCategory = await Category.findByIdAndUpdate(categoryId, req.body, { new: true });
         if (!updatedCategory) return res.status(404).json({ message: 'Category not found' });
         res.status(200).json(updatedCategory);
     } catch (error) {
@@ -46,7 +49,8 @@ const updateCategory = async (req, res) => {
 // DELETE a category by ID
 const deleteCategory = async (req, res) => {
     try {
-        const deletedCategory = await Category.findByIdAndDelete(req.params.id);
+        const categoryId = mongoose.Types.ObjectId(req.params.id); // Convert to ObjectId
+        const deletedCategory = await Category.findByIdAndDelete(categoryId);
         if (!deletedCategory) return res.status(404).json({ message: 'Category not found' });
         res.status(204).send();
     } catch (error) {
