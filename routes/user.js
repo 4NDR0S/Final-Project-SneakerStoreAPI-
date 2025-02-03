@@ -17,7 +17,7 @@ const {
 
 /**
  * @swagger
- * /api/users:
+ * /api/user:
  *   get:
  *     summary: Get all users
  *     tags: [Users]
@@ -28,7 +28,7 @@ const {
 
 /**
  * @swagger
- * /api/users:
+ * /api/user:
  *   post:
  *     summary: Create a new user
  *     tags: [Users]
@@ -39,7 +39,7 @@ const {
 
 /**
  * @swagger
- * /api/users/{id}:
+ * /api/user/{id}:
  *   put:
  *     summary: Update a user by ID
  *     tags: [Users]
@@ -57,7 +57,7 @@ const {
 
 /**
  * @swagger
- * /api/users/{id}:
+ * /api/user/{id}:
  *   delete:
  *     summary: Delete a user by ID
  *     tags: [Users]

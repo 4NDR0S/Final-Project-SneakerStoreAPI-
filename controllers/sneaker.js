@@ -12,7 +12,7 @@ const getAllSneakers = async (req, res) => {
 
 /**
  * @swagger
- * /api/sneakers:
+ * /api/sneaker:
  *   get:
  *     summary: Get all sneakers
  *     tags: [Sneakers]
@@ -32,7 +32,7 @@ const getSneakerById = async (req, res) => {
 
 /**
  * @swagger
- * /api/sneakers:
+ * /api/sneaker:
  *   post:
  *     summary: Create a new sneaker
  *     tags: [Sneakers]
@@ -52,7 +52,7 @@ const createSneaker = async (req, res) => {
 
 /**
  * @swagger
- * /api/sneakers/{id}:
+ * /api/sneaker/{id}:
  *   put:
  *     summary: Update a sneaker by ID
  *     tags: [Sneakers]
@@ -79,7 +79,7 @@ const updateSneaker = async (req, res) => {
 
 /**
  * @swagger
- * /api/sneakers/{id}:
+ * /api/sneaker/{id}:
  *   delete:
  *     summary: Delete a sneaker by ID
  *     tags: [Sneakers]
