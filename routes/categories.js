@@ -40,6 +40,23 @@ const {
 /**
  * @swagger
  * /api/categories/{id}:
+ *   get:
+ *     summary: Get a category by ID
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: ID of the category to retrieve
+ *     responses:
+ *       200:
+ *         description: Category found
+ *       404:
+ *         description: Category not found
+ */
+
+/**
+ * @swagger
+ * /api/categories/{id}:
  *   put:
  *     summary: Update a category by ID
  *     tags: [Categories]

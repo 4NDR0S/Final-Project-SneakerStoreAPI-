@@ -17,7 +17,7 @@ const {
 
 /**
  * @swagger
- * /api/user:
+ * /api/users:
  *   get:
  *     summary: Get all users
  *     tags: [Users]
@@ -28,7 +28,7 @@ const {
 
 /**
  * @swagger
- * /api/user:
+ * /api/users:
  *   post:
  *     summary: Create a new user
  *     tags: [Users]
@@ -39,7 +39,24 @@ const {
 
 /**
  * @swagger
- * /api/user/{id}:
+ * /api/users/{id}:
+ *   get:
+ *     summary: Get a user by ID
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: ID of the user to retrieve
+ *     responses:
+ *       200:
+ *         description: User found
+ *       404:
+ *         description: User not found
+ */
+
+/**
+ * @swagger
+ * /api/users/{id}:
  *   put:
  *     summary: Update a user by ID
  *     tags: [Users]
@@ -57,7 +74,7 @@ const {
 
 /**
  * @swagger
- * /api/user/{id}:
+ * /api/users/{id}:
  *   delete:
  *     summary: Delete a user by ID
  *     tags: [Users]
