@@ -20,9 +20,9 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs)); // Swagger 
 
 // Routes
 app.use('/api/categories', categoriesRoutes);
-app.use('/api/orders', ordersRoutes);
-app.use('/api/sneakers', sneakersRoutes);
-app.use('/api/users', usersRoutes);
+app.use('/api/order', ordersRoutes);
+app.use('/api/sneaker', sneakersRoutes);
+app.use('/api/user', usersRoutes);
 
 // Handle 404 for unknown routes
 app.use((req, res) => {

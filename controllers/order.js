@@ -13,7 +13,7 @@ const getAllOrders = async (req, res) => {
 
 /**
  * @swagger
- * /api/orders:
+ * /api/order:
  *   get:
  *     summary: Get all orders
  *     tags: [Orders]
@@ -34,7 +34,7 @@ const getOrderById = async (req, res) => {
 
 /**
  * @swagger
- * /api/orders:
+ * /api/order:
  *   post:
  *     summary: Create a new order
  *     tags: [Orders]
@@ -54,7 +54,7 @@ const createOrder = async (req, res) => {
 
 /**
  * @swagger
- * /api/orders/{id}:
+ * /api/order/{id}:
  *   put:
  *     summary: Update an order by ID
  *     tags: [Orders]
@@ -82,7 +82,7 @@ const updateOrder = async (req, res) => {
 
 /**
  * @swagger
- * /api/orders/{id}:
+ * /api/order/{id}:
  *   delete:
  *     summary: Delete an order by ID
  *     tags: [Orders]

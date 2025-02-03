@@ -3,29 +3,26 @@ dotenv.config();
 
 const mongoose = require('mongoose');
 
-const MongoClient = require('mongodb').MongoClient;
-
 let database;
-
-// Import models
-const User = require('../models/user');
-const Sneaker = require('../models/sneaker');
-const Order = require('../models/order');
-const Category = require('../models/category');
 
 const initDb = (callback) => {
     if (database) {
         console.log('Db is already initialized');
         return callback(null, database);
     }
-    MongoClient.connect(process.env.MONGODB_URL)
-        .then((client) => {
-            database = client;
-            callback(null, database);
-        })
-        .catch((err) => {
-            callback(err);
-        });
+    mongoose.connect(process.env.MONGODB_URL, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        serverSelectionTimeoutMS: 20000, // Increase timeout to 20 seconds
+        socketTimeoutMS: 45000 // Increase socket timeout to 45 seconds
+    })
+    .then((client) => {
+        database = client;
+        callback(null, database);
+    })
+    .catch((err) => {
+        callback(err);
+    });
 };
 
 const getDatabase = () => {
@@ -37,9 +34,5 @@ const getDatabase = () => {
 
 module.exports = {
     initDb,
-    getDatabase,
-    User,
-    Sneaker,
-    Order,
-    Category
+    getDatabase
 };

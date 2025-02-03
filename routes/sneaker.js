@@ -17,7 +17,7 @@ const {
 
 /**
  * @swagger
- * /api/sneakers:
+ * /api/sneaker:
  *   get:
  *     summary: Get all sneakers
  *     tags: [Sneakers]
@@ -28,7 +28,7 @@ const {
 
 /**
  * @swagger
- * /api/sneakers:
+ * /api/sneaker:
  *   post:
  *     summary: Create a new sneaker
  *     tags: [Sneakers]
@@ -39,7 +39,7 @@ const {
 
 /**
  * @swagger
- * /api/sneakers/{id}:
+ * /api/sneaker/{id}:
  *   get:
  *     summary: Get a sneaker by ID
  *     parameters:
@@ -56,7 +56,7 @@ const {
 
 /**
  * @swagger
- * /api/sneakers/{id}:
+ * /api/sneaker/{id}:
  *   put:
  *     summary: Update a sneaker by ID
  *     tags: [Sneakers]
@@ -74,7 +74,7 @@ const {
 
 /**
  * @swagger
- * /api/sneakers/{id}:
+ * /api/sneaker/{id}:
  *   delete:
  *     summary: Delete a sneaker by ID
  *     tags: [Sneakers]
