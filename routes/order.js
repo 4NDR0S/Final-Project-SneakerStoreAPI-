@@ -17,7 +17,7 @@ const {
 
 /**
  * @swagger
- * /api/order:
+ * /api/orders:
  *   get:
  *     summary: Get all orders
  *     tags: [Orders]
@@ -28,7 +28,7 @@ const {
 
 /**
  * @swagger
- * /api/order:
+ * /api/orders:
  *   post:
  *     summary: Create a new order
  *     tags: [Orders]
@@ -39,7 +39,7 @@ const {
 
 /**
  * @swagger
- * /api/order/{id}:
+ * /api/orders/{id}:
  *   get:
  *     summary: Get an order by ID
  *     parameters:
@@ -56,7 +56,7 @@ const {
 
 /**
  * @swagger
- * /api/order/{id}:
+ * /api/orders/{id}:
  *   put:
  *     summary: Update an order by ID
  *     tags: [Orders]
@@ -74,7 +74,7 @@ const {
 
 /**
  * @swagger
- * /api/order/{id}:
+ * /api/orders/{id}:
  *   delete:
  *     summary: Delete an order by ID
  *     tags: [Orders]
