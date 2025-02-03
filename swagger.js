@@ -1,9 +1,7 @@
-const swaggerJsDoc = require('swagger-jsdoc'); // Importing swagger-jsdoc for API documentation
-const swaggerUi = require('swagger-ui-express'); // Importing swagger-ui-express for serving the documentation
+const swaggerJsDoc = require('swagger-jsdoc');
+const swaggerUi = require('swagger-ui-express');
 
-
-const swaggerOptions = { // Swagger options configuration
-
+const swaggerOptions = {
     swaggerDefinition: {
         openapi: '3.0.0',
         info: {
@@ -18,10 +16,8 @@ const swaggerOptions = { // Swagger options configuration
         ],
     },
     apis: ['./routes/*.js'], // Path to the API documentation files
-
 };
 
-const swaggerDocs = swaggerJsDoc(swaggerOptions); // Generating Swagger documentation
+const swaggerDocs = swaggerJsDoc(swaggerOptions);
 
-
-module.exports = swaggerDocs; // Exporting the Swagger documentation
+module.exports = swaggerDocs;

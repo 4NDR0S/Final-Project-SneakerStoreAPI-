@@ -8,19 +8,39 @@ const {
     deleteUser
 } = require('../controllers/user');
 
-// GET all users
+/**
+ * @swagger
+ * tags:
+ *   name: Users
+ *   description: The users managing API
+ */
+
+/**
+ * @swagger
+ * /api/users:
+ *   get:
+ *     summary: Get all users
+ *     tags: [Users]
+ *     responses:
+ *       200:
+ *         description: A list of users
+ */
+
+/**
+ * @swagger
+ * /api/users:
+ *   post:
+ *     summary: Create a new user
+ *     tags: [Users]
+ *     responses:
+ *       201:
+ *         description: User created
+ */
+
 router.get('/', getAllUsers);
-
-// GET a single user by ID
 router.get('/:id', getUserById);
-
-// POST a new user
 router.post('/', createUser);
-
-// PUT to update a user by ID
 router.put('/:id', updateUser);
-
-// DELETE a user by ID
 router.delete('/:id', deleteUser);
 
 module.exports = router;

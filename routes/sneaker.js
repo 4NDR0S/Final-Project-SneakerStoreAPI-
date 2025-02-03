@@ -8,19 +8,39 @@ const {
     deleteSneaker
 } = require('../controllers/sneaker');
 
-// GET all sneakers
+/**
+ * @swagger
+ * tags:
+ *   name: Sneakers
+ *   description: The sneakers managing API
+ */
+
+/**
+ * @swagger
+ * /api/sneakers:
+ *   get:
+ *     summary: Get all sneakers
+ *     tags: [Sneakers]
+ *     responses:
+ *       200:
+ *         description: A list of sneakers
+ */
+
+/**
+ * @swagger
+ * /api/sneakers:
+ *   post:
+ *     summary: Create a new sneaker
+ *     tags: [Sneakers]
+ *     responses:
+ *       201:
+ *         description: Sneaker created
+ */
+
 router.get('/', getAllSneakers);
-
-// GET a single sneaker by ID
 router.get('/:id', getSneakerById);
-
-// POST a new sneaker
 router.post('/', createSneaker);
-
-// PUT to update a sneaker by ID
 router.put('/:id', updateSneaker);
-
-// DELETE a sneaker by ID
 router.delete('/:id', deleteSneaker);
 
 module.exports = router;

@@ -8,19 +8,39 @@ const {
     deleteCategory
 } = require('../controllers/categories');
 
-// GET all categories
+/**
+ * @swagger
+ * tags:
+ *   name: Categories
+ *   description: The categories managing API
+ */
+
+/**
+ * @swagger
+ * /api/categories:
+ *   get:
+ *     summary: Get all categories
+ *     tags: [Categories]
+ *     responses:
+ *       200:
+ *         description: A list of categories
+ */
+
+/**
+ * @swagger
+ * /api/categories:
+ *   post:
+ *     summary: Create a new category
+ *     tags: [Categories]
+ *     responses:
+ *       201:
+ *         description: Category created
+ */
+
 router.get('/', getAllCategories);
-
-// GET a single category by ID
 router.get('/:id', getCategoryById);
-
-// POST a new category
 router.post('/', createCategory);
-
-// PUT to update a category by ID
 router.put('/:id', updateCategory);
-
-// DELETE a category by ID
 router.delete('/:id', deleteCategory);
 
 module.exports = router;

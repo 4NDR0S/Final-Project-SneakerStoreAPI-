@@ -8,19 +8,39 @@ const {
     deleteOrder
 } = require('../controllers/order');
 
-// GET all orders
+/**
+ * @swagger
+ * tags:
+ *   name: Orders
+ *   description: The orders managing API
+ */
+
+/**
+ * @swagger
+ * /api/orders:
+ *   get:
+ *     summary: Get all orders
+ *     tags: [Orders]
+ *     responses:
+ *       200:
+ *         description: A list of orders
+ */
+
+/**
+ * @swagger
+ * /api/orders:
+ *   post:
+ *     summary: Create a new order
+ *     tags: [Orders]
+ *     responses:
+ *       201:
+ *         description: Order created
+ */
+
 router.get('/', getAllOrders);
-
-// GET a single order by ID
 router.get('/:id', getOrderById);
-
-// POST a new order
 router.post('/', createOrder);
-
-// PUT to update an order by ID
 router.put('/:id', updateOrder);
-
-// DELETE an order by ID
 router.delete('/:id', deleteOrder);
 
 module.exports = router;
