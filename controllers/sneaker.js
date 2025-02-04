@@ -5,7 +5,16 @@ const Sneaker = require('../models/sneaker'); // Importing the Sneaker model
 const getAllSneakers = async (req, res) => {
     try {
         const sneakers = await Sneaker.find();
-        res.status(200).json(sneakers);
+        const formattedSneakers = sneakers.map(sneaker => ({
+            _id: sneaker._id, // Include the _id field
+            name: sneaker.name,
+            brand: sneaker.brand,
+            category_id: sneaker.category_id,
+            price: sneaker.price,
+            stock: sneaker.stock
+        }));
+        res.status(200).json(formattedSneakers);
+
     } catch (error) {
         res.status(500).json({ message: error.message });
     }

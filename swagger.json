@@ -24,15 +24,9 @@
                   "items": {
                     "type": "object",
                     "properties": {
-                      "_id": {
-                        "type": "integer"
-                      },
-                      "name": {
-                        "type": "string"
-                      },
-                      "description": {
-                        "type": "string"
-                      }
+                      "_id": { "type": "string" },
+                      "name": { "type": "string" },
+                      "description": { "type": "string" }
                     },
                     "required": ["_id", "name", "description"]
                   }
@@ -52,15 +46,9 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "_id": {
-                      "type": "integer"
-                    },
-                    "name": {
-                      "type": "string"
-                    },
-                    "description": {
-                      "type": "string"
-                    }
+                    "_id": { "type": "string" },
+                    "name": { "type": "string" },
+                    "description": { "type": "string" }
                   },
                   "required": ["_id", "name", "description"]
                 }
@@ -78,7 +66,8 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "description": "ID of the category to retrieve"
+            "description": "ID of the category to retrieve",
+            "schema": { "type": "string" }
           }
         ],
         "responses": {
@@ -89,15 +78,9 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "_id": {
-                      "type": "integer"
-                    },
-                    "name": {
-                      "type": "string"
-                    },
-                    "description": {
-                      "type": "string"
-                    }
+                    "_id": { "type": "string" },
+                    "name": { "type": "string" },
+                    "description": { "type": "string" }
                   },
                   "required": ["_id", "name", "description"]
                 }
@@ -106,124 +89,6 @@
           },
           "404": {
             "description": "Category not found"
-          }
-        }
-      },
-      "put": {
-        "summary": "Update a category by ID",
-        "responses": {
-          "200": {
-            "description": "Category updated",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "_id": {
-                      "type": "integer"
-                    },
-                    "name": {
-                      "type": "string"
-                    },
-                    "description": {
-                      "type": "string"
-                    }
-                  },
-                  "required": ["_id", "name", "description"]
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Category not found"
-          }
-        }
-      },
-      "delete": {
-        "summary": "Delete a category by ID",
-        "responses": {
-          "204": {
-            "description": "Category deleted"
-          },
-          "404": {
-            "description": "Category not found"
-          }
-        }
-      }
-    },
-    "/api/orders": {
-      "get": {
-        "summary": "Get all orders",
-        "responses": {
-          "200": {
-            "description": "A list of orders",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "_id": {
-                        "type": "integer"
-                      },
-                      "user_id": {
-                        "type": "integer"
-                      },
-                      "sneaker_id": {
-                        "type": "integer"
-                      },
-                      "quantity": {
-                        "type": "integer"
-                      },
-                      "total_price": {
-                        "type": "number"
-                      },
-                      "status": {
-                        "type": "string"
-                      }
-                    },
-                    "required": ["_id", "user_id", "sneaker_id", "quantity", "total_price", "status"]
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "summary": "Create a new order",
-        "responses": {
-          "201": {
-            "description": "Order created",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "_id": {
-                      "type": "integer"
-                    },
-                    "user_id": {
-                      "type": "integer"
-                    },
-                    "sneaker_id": {
-                      "type": "integer"
-                    },
-                    "quantity": {
-                      "type": "integer"
-                    },
-                    "total_price": {
-                      "type": "number"
-                    },
-                    "status": {
-                      "type": "string"
-                    }
-                  },
-                  "required": ["_id", "user_id", "sneaker_id", "quantity", "total_price", "status"]
-                }
-              }
-            }
           }
         }
       }
@@ -236,7 +101,8 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "description": "ID of the order to retrieve"
+            "description": "ID of the order to retrieve",
+            "schema": { "type": "string" }
           }
         ],
         "responses": {
@@ -247,24 +113,12 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "_id": {
-                      "type": "integer"
-                    },
-                    "user_id": {
-                      "type": "integer"
-                    },
-                    "sneaker_id": {
-                      "type": "integer"
-                    },
-                    "quantity": {
-                      "type": "integer"
-                    },
-                    "total_price": {
-                      "type": "number"
-                    },
-                    "status": {
-                      "type": "string"
-                    }
+                    "_id": { "type": "string" },
+                    "user_id": { "type": "string" },
+                    "sneaker_id": { "type": "string" },
+                    "quantity": { "type": "integer" },
+                    "total_price": { "type": "number" },
+                    "status": { "type": "string" }
                   },
                   "required": ["_id", "user_id", "sneaker_id", "quantity", "total_price", "status"]
                 }
@@ -273,133 +127,6 @@
           },
           "404": {
             "description": "Order not found"
-          }
-        }
-      },
-      "put": {
-        "summary": "Update an order by ID",
-        "responses": {
-          "200": {
-            "description": "Order updated",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "_id": {
-                      "type": "integer"
-                    },
-                    "user_id": {
-                      "type": "integer"
-                    },
-                    "sneaker_id": {
-                      "type": "integer"
-                    },
-                    "quantity": {
-                      "type": "integer"
-                    },
-                    "total_price": {
-                      "type": "number"
-                    },
-                    "status": {
-                      "type": "string"
-                    }
-                  },
-                  "required": ["_id", "user_id", "sneaker_id", "quantity", "total_price", "status"]
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Order not found"
-          }
-        }
-      },
-      "delete": {
-        "summary": "Delete an order by ID",
-        "responses": {
-          "204": {
-            "description": "Order deleted"
-          },
-          "404": {
-            "description": "Order not found"
-          }
-        }
-      }
-    },
-    "/api/sneakers": {
-      "get": {
-        "summary": "Get all sneakers",
-        "responses": {
-          "200": {
-            "description": "A list of sneakers",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "_id": {
-                        "type": "integer"
-                      },
-                      "name": {
-                        "type": "string"
-                      },
-                      "brand": {
-                        "type": "string"
-                      },
-                      "category_id": {
-                        "type": "integer"
-                      },
-                      "price": {
-                        "type": "number"
-                      },
-                      "stock": {
-                        "type": "integer"
-                      }
-                    },
-                    "required": ["_id", "name", "brand", "category_id", "price", "stock"]
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "summary": "Create a new sneaker",
-        "responses": {
-          "201": {
-            "description": "Sneaker created",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "_id": {
-                      "type": "integer"
-                    },
-                    "name": {
-                      "type": "string"
-                    },
-                    "brand": {
-                      "type": "string"
-                    },
-                    "category_id": {
-                      "type": "integer"
-                    },
-                    "price": {
-                      "type": "number"
-                    },
-                    "stock": {
-                      "type": "integer"
-                    }
-                  },
-                  "required": ["_id", "name", "brand", "category_id", "price", "stock"]
-                }
-              }
-            }
           }
         }
       }
@@ -412,7 +139,8 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "description": "ID of the sneaker to retrieve"
+            "description": "ID of the sneaker to retrieve",
+            "schema": { "type": "string" }
           }
         ],
         "responses": {
@@ -423,24 +151,12 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "_id": {
-                      "type": "integer"
-                    },
-                    "name": {
-                      "type": "string"
-                    },
-                    "brand": {
-                      "type": "string"
-                    },
-                    "category_id": {
-                      "type": "integer"
-                    },
-                    "price": {
-                      "type": "number"
-                    },
-                    "stock": {
-                      "type": "integer"
-                    }
+                    "_id": { "type": "string" },
+                    "name": { "type": "string" },
+                    "brand": { "type": "string" },
+                    "category_id": { "type": "string" },
+                    "price": { "type": "number" },
+                    "stock": { "type": "integer" }
                   },
                   "required": ["_id", "name", "brand", "category_id", "price", "stock"]
                 }
@@ -449,127 +165,6 @@
           },
           "404": {
             "description": "Sneaker not found"
-          }
-        }
-      },
-      "put": {
-        "summary": "Update a sneaker by ID",
-        "responses": {
-          "200": {
-            "description": "Sneaker updated",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "_id": {
-                      "type": "integer"
-                    },
-                    "name": {
-                      "type": "string"
-                    },
-                    "brand": {
-                      "type": "string"
-                    },
-                    "category_id": {
-                      "type": "integer"
-                    },
-                    "price": {
-                      "type": "number"
-                    },
-                    "stock": {
-                      "type": "integer"
-                    }
-                  },
-                  "required": ["_id", "name", "brand", "category_id", "price", "stock"]
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Sneaker not found"
-          }
-        }
-      },
-      "delete": {
-        "summary": "Delete a sneaker by ID",
-        "responses": {
-          "204": {
-            "description": "Sneaker deleted"
-          },
-          "404": {
-            "description": "Sneaker not found"
-          }
-        }
-      }
-    },
-    "/api/users": {
-      "get": {
-        "summary": "Get all users",
-        "responses": {
-          "200": {
-            "description": "A list of users",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "_id": {
-                        "type": "integer"
-                      },
-                      "name": {
-                        "type": "string"
-                      },
-                      "email": {
-                        "type": "string"
-                      },
-                      "address": {
-                        "type": "string"
-                      },
-                      "phone": {
-                        "type": "string"
-                      }
-                    },
-                    "required": ["_id", "name", "email", "address", "phone"]
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "summary": "Create a new user",
-        "responses": {
-          "201": {
-            "description": "User created",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "_id": {
-                      "type": "integer"
-                    },
-                    "name": {
-                      "type": "string"
-                    },
-                    "email": {
-                      "type": "string"
-                    },
-                    "address": {
-                      "type": "string"
-                    },
-                    "phone": {
-                      "type": "string"
-                    }
-                  },
-                  "required": ["_id", "name", "email", "address", "phone"]
-                }
-              }
-            }
           }
         }
       }
@@ -582,8 +177,8 @@
             "name": "id",
             "in": "path",
             "required": true,
-        "description": "ID of the users to retrieve"
-
+            "description": "ID of the user to retrieve",
+            "schema": { "type": "string" }
           }
         ],
         "responses": {
@@ -594,73 +189,16 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "_id": {
-                      "type": "integer"
-                    },
-                    "name": {
-                      "type": "string"
-                    },
-                    "email": {
-                      "type": "string"
-                    },
-                    "address": {
-                      "type": "string"
-                    },
-                    "phone": {
-                      "type": "string"
-                    }
+                    "_id": { "type": "string" },
+                    "name": { "type": "string" },
+                    "email": { "type": "string" },
+                    "address": { "type": "string" },
+                    "phone": { "type": "string" }
                   },
                   "required": ["_id", "name", "email", "address", "phone"]
                 }
               }
             }
-          },
-          "404": {
-            "description": "User not found"
-          }
-        }
-      },
-      "put": {
-        "summary": "Update a user by ID",
-        "responses": {
-          "200": {
-            "description": "User updated",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "_id": {
-                      "type": "integer"
-                    },
-                    "name": {
-                      "type": "string"
-                    },
-                    "email": {
-                      "type": "string"
-                    },
-                    "address": {
-                      "type": "string"
-                    },
-                    "phone": {
-                      "type": "string"
-                    }
-                  },
-                  "required": ["_id", "name", "email", "address", "phone"]
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "User not found"
-          }
-        }
-      },
-      "delete": {
-        "summary": "Delete a user by ID",
-        "responses": {
-          "204": {
-            "description": "User deleted"
           },
           "404": {
             "description": "User not found"

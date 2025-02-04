@@ -5,21 +5,22 @@ const Order = require('../models/order'); // Importing the Order model
 const getAllOrders = async (req, res) => {
     try {
         const orders = await Order.find();
-        const formattedOrders = orders.map(order => ({
-            _id: order._id,
-            user_id: order.user_id,
-            sneaker_id: order.sneaker_id,
-            quantity: order.quantity,
-            total_price: order.total_price,
-            status: order.status
-        }));
-        res.status(200).json(formattedOrders);
+        res.status(200).json(orders);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
 };
 
-// GET an order by ID
+/**
+ * @swagger
+ * /api/order:
+ *   get:
+ *     summary: Get all orders
+ *     tags: [Orders]
+ *     responses:
+ *       200:
+ *         description: A list of orders
+ */
 const getOrderById = async (req, res) => {
     try {
         const orderId = mongoose.Types.ObjectId(req.params.id); // Convert to ObjectId
@@ -31,7 +32,16 @@ const getOrderById = async (req, res) => {
     }
 };
 
-// POST a new order
+/**
+ * @swagger
+ * /api/order:
+ *   post:
+ *     summary: Create a new order
+ *     tags: [Orders]
+ *     responses:
+ *       201:
+ *         description: Order created
+ */
 const createOrder = async (req, res) => {
     const order = new Order(req.body);
     try {
@@ -42,7 +52,23 @@ const createOrder = async (req, res) => {
     }
 };
 
-// PUT to update an order by ID
+/**
+ * @swagger
+ * /api/order/{id}:
+ *   put:
+ *     summary: Update an order by ID
+ *     tags: [Orders]
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: ID of the order to update
+ *     responses:
+ *       200:
+ *         description: Order updated
+ *       404:
+ *         description: Order not found
+ */
 const updateOrder = async (req, res) => {
     try {
         const orderId = mongoose.Types.ObjectId(req.params.id); // Convert to ObjectId
@@ -54,7 +80,23 @@ const updateOrder = async (req, res) => {
     }
 };
 
-// DELETE an order by ID
+/**
+ * @swagger
+ * /api/order/{id}:
+ *   delete:
+ *     summary: Delete an order by ID
+ *     tags: [Orders]
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: ID of the order to delete
+ *     responses:
+ *       204:
+ *         description: Order deleted
+ *       404:
+ *         description: Order not found
+ */
 const deleteOrder = async (req, res) => {
     try {
         const orderId = mongoose.Types.ObjectId(req.params.id); // Convert to ObjectId
