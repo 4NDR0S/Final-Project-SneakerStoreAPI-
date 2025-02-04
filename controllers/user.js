@@ -1,4 +1,6 @@
 const User = require('../models/user'); // Importing the User model
+const mongoose = require('mongoose');
+const { ObjectId } = mongoose.Types;
 
 // GET all users
 const getAllUsers = async (req, res) => {
@@ -13,7 +15,6 @@ const getAllUsers = async (req, res) => {
             phone: user.phone
         }));
         res.status(200).json(usersWithId);
-
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
@@ -31,8 +32,15 @@ const getAllUsers = async (req, res) => {
  */
 const getUserById = async (req, res) => {
     console.log('getUserById called'); // Log when the function is called
+    const userId = req.params.id;
+
+    if (!ObjectId.isValid(userId)) {
+        return res.status(400).json({ message: 'Invalid ID format' });
+    }
+
     try {
-        const user = await User.findById(req.params.id);
+        const user = await User.findById(userId);
+
         if (!user) return res.status(404).json({ message: 'User not found' });
         res.status(200).json(user);
     } catch (error) {

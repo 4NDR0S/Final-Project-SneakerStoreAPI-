@@ -582,7 +582,8 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "description": "ID of the user to retrieve"
+        "description": "ID of the users to retrieve"
+
           }
         ],
         "responses": {

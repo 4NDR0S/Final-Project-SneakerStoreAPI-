@@ -14,7 +14,7 @@ const getAllCategories = async (req, res) => {
 // GET a single category by ID
 const getCategoryById = async (req, res) => {
     try {
-        const categoryId = mongoose.Types.ObjectId(req.params.id); // Convert to ObjectId
+        const categoryId = new mongoose.Types.ObjectId(req.params.id); // Convert to ObjectId
         const category = await Category.findById(categoryId);
         if (!category) return res.status(404).json({ message: 'Category not found' });
         res.status(200).json(category);
@@ -37,7 +37,7 @@ const createCategory = async (req, res) => {
 // PUT to update a category by ID
 const updateCategory = async (req, res) => {
     try {
-        const categoryId = mongoose.Types.ObjectId(req.params.id); // Convert to ObjectId
+        const categoryId = new mongoose.Types.ObjectId(req.params.id); // Convert to ObjectId
         const updatedCategory = await Category.findByIdAndUpdate(categoryId, req.body, { new: true });
         if (!updatedCategory) return res.status(404).json({ message: 'Category not found' });
         res.status(200).json(updatedCategory);
@@ -49,7 +49,7 @@ const updateCategory = async (req, res) => {
 // DELETE a category by ID
 const deleteCategory = async (req, res) => {
     try {
-        const categoryId = mongoose.Types.ObjectId(req.params.id); // Convert to ObjectId
+        const categoryId = new mongoose.Types.ObjectId(req.params.id); // Convert to ObjectId
         const deletedCategory = await Category.findByIdAndDelete(categoryId);
         if (!deletedCategory) return res.status(404).json({ message: 'Category not found' });
         res.status(204).send();

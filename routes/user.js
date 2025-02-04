@@ -13,7 +13,6 @@ const userController = require('../controllers/user');
 /**
  * @swagger
  * /api/user:
-
  *   get:
  *     summary: Get all users
  *     tags: [Users]
@@ -29,12 +28,10 @@ router.get('/', (req, res) => {
 
 
 
-
 router.get('/:id', (req, res) => {
     console.log('getUserById called');
     userController.getUserById(req, res);
 });
-
 
 
 
@@ -45,12 +42,10 @@ router.post('/', (req, res) => {
 
 
 
-
 router.put('/:id', (req, res) => {
     console.log('updateUser called');
     userController.updateUser(req, res);
 });
-
 
 
 
