@@ -8,7 +8,7 @@ const getAllUsers = async (req, res) => {
     try {
         const users = await User.find();
         const usersWithId = users.map(user => ({
-            _id: user._id,
+            _id: user._id, // Include the _id field
             name: user.name,
             email: user.email,
             address: user.address,
