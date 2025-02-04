@@ -11,7 +11,7 @@ const userController = require('../controllers/user');
 
 /**
  * @swagger
- * /api/user:
+ * /api/users:
  *   get:
  *     summary: Get all users
  *     tags: [Users]
@@ -44,7 +44,7 @@ const userController = require('../controllers/user');
 
 /**
  * @swagger
- * /api/user:
+ * /api/users:
  *   post:
  *     summary: Create a new user
  *     tags: [Users]
@@ -74,7 +74,7 @@ const userController = require('../controllers/user');
 
 /**
  * @swagger
- * /api/user/{id}:
+ * /api/users/{id}:
  *   get:
  *     summary: Get a user by ID
  *     tags: [Users]
@@ -107,7 +107,7 @@ const userController = require('../controllers/user');
 
 /**
  * @swagger
- * /api/user/{id}:
+ * /api/users/{id}:
  *   put:
  *     summary: Update a user by ID
  *     tags: [Users]
@@ -140,7 +140,7 @@ const userController = require('../controllers/user');
 
 /**
  * @swagger
- * /api/user/{id}:
+ * /api/users/{id}:
  *   delete:
  *     summary: Delete a user by ID
  *     tags: [Users]
