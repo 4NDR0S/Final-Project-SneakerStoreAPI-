@@ -12,7 +12,8 @@ const userController = require('../controllers/user');
 
 /**
  * @swagger
- * /api/users:
+ * /api/user:
+
  *   get:
  *     summary: Get all users
  *     tags: [Users]

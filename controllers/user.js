@@ -5,7 +5,15 @@ const getAllUsers = async (req, res) => {
     console.log('getAllUsers called'); // Log when the function is called
     try {
         const users = await User.find();
-        res.status(200).json(users);
+        const usersWithId = users.map(user => ({
+            _id: user._id,
+            name: user.name,
+            email: user.email,
+            address: user.address,
+            phone: user.phone
+        }));
+        res.status(200).json(usersWithId);
+
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
