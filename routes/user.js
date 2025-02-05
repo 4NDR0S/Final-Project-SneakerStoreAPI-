@@ -26,7 +26,7 @@ const userController = require('../controllers/user');
  *                 type: object
  *                 properties:
  *                   id:
- *                     type: integer
+ *                     type: string
  *                     description: The user ID
  *                   name:
  *                     type: string
@@ -84,7 +84,7 @@ const userController = require('../controllers/user');
  *         description: The ID of the user
  *         required: true
  *         schema:
- *           type: integer
+ *           type: string
  *     responses:
  *       200:
  *         description: A user object
@@ -94,7 +94,7 @@ const userController = require('../controllers/user');
  *               type: object
  *               properties:
  *                 id:
- *                   type: integer
+ *                   type: string
  *                 name:
  *                   type: string
  *                 email:
@@ -117,7 +117,7 @@ const userController = require('../controllers/user');
  *         description: The ID of the user
  *         required: true
  *         schema:
- *           type: integer
+ *           type: string
  *     requestBody:
  *       required: true
  *       content:
@@ -150,7 +150,7 @@ const userController = require('../controllers/user');
  *         description: The ID of the user to delete
  *         required: true
  *         schema:
- *           type: integer
+ *           type: string
  *     responses:
  *       204:
  *         description: User deleted successfully
