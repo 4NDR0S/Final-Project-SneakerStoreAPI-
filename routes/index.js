@@ -8,8 +8,8 @@ const usersRoutes = require('./user');
 
 // Use the imported routes
 router.use('/categories', categoriesRoutes);
-router.use('/order', ordersRoutes);
-router.use('/sneaker', sneakersRoutes);
-router.use('/user', usersRoutes);
+router.use('/orders', ordersRoutes);
+router.use('/sneakers', sneakersRoutes);
+router.use('/users', usersRoutes);
 
 module.exports = router;

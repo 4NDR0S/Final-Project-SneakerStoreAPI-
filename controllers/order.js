@@ -2,6 +2,16 @@ const mongoose = require('mongoose');
 const Order = require('../models/order'); // Importing the Order model
 
 // GET all orders
+/**
+ * @swagger
+ * /api/orders:
+ *   get:
+ *     summary: Get all orders
+ *     tags: [Orders]
+ *     responses:
+ *       200:
+ *         description: A list of orders
+ */
 const getAllOrders = async (req, res) => {
     try {
         const orders = await Order.find();
@@ -12,16 +22,23 @@ const getAllOrders = async (req, res) => {
     }
 };
 
-
+// GET a single order by ID
 /**
  * @swagger
- * /api/order:
+ * /api/orders/{id}:
  *   get:
- *     summary: Get all orders
+ *     summary: Get an order by ID
  *     tags: [Orders]
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: ID of the order to retrieve
  *     responses:
  *       200:
- *         description: A list of orders
+ *         description: Order found
+ *       404:
+ *         description: Order not found
  */
 const getOrderById = async (req, res) => {
     try {
@@ -39,16 +56,35 @@ const getOrderById = async (req, res) => {
     }
 };
 
-
+// POST a new order
 /**
  * @swagger
- * /api/order:
+ * /api/orders:
  *   post:
  *     summary: Create a new order
  *     tags: [Orders]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               user_id:
+ *                 type: integer
+ *               sneaker_id:
+ *                 type: integer
+ *               quantity:
+ *                 type: integer
+ *               total_price:
+ *                 type: number
+ *               status:
+ *                 type: string
  *     responses:
  *       201:
  *         description: Order created
+ *       400:
+ *         description: Missing required fields
  */
 const createOrder = async (req, res) => {
     try {
@@ -66,10 +102,10 @@ const createOrder = async (req, res) => {
     }
 };
 
-
+// PUT to update an order by ID
 /**
  * @swagger
- * /api/order/{id}:
+ * /api/orders/{id}:
  *   put:
  *     summary: Update an order by ID
  *     tags: [Orders]
@@ -78,6 +114,23 @@ const createOrder = async (req, res) => {
  *         in: path
  *         required: true
  *         description: ID of the order to update
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               user_id:
+ *                 type: integer
+ *               sneaker_id:
+ *                 type: integer
+ *               quantity:
+ *                 type: integer
+ *               total_price:
+ *                 type: number
+ *               status:
+ *                 type: string
  *     responses:
  *       200:
  *         description: Order updated
@@ -91,7 +144,7 @@ const updateOrder = async (req, res) => {
         }
 
         const updatedOrder = await Order.findByIdAndUpdate(req.params.id, req.body, { new: true });
-        if (!updatedOrder) return res.status(404).json({ message: 'Order not found' });
+        if (!updatedOrder) return res.status(404). json({ message: 'Order not found' });
 
         res.status(200).json(updatedOrder);
     } catch (error) {
@@ -100,10 +153,10 @@ const updateOrder = async (req, res) => {
     }
 };
 
-
+// DELETE an order by ID
 /**
  * @swagger
- * /api/order/{id}:
+ * /api/orders/{id}:
  *   delete:
  *     summary: Delete an order by ID
  *     tags: [Orders]
@@ -133,7 +186,6 @@ const deleteOrder = async (req, res) => {
         res.status(500).json({ message: "Server error", error: error.message });
     }
 };
-
 
 module.exports = {
     getAllOrders,

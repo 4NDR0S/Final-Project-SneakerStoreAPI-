@@ -90,10 +90,11 @@ const {
  *         description: Sneaker not found
  */
 
+// Corrected routes
 router.get('/', getAllSneakers);
-router.get('/sneakers/:id', getSneakerById);
+router.get('/:id', getSneakerById); // Removed '/sneakers' prefix
 router.post('/', createSneaker);
-router.put('/sneakers/:id', updateSneaker);
-router.delete('/sneakers/:id', deleteSneaker);
+router.put('/:id', updateSneaker); // Removed '/sneakers' prefix
+router.delete('/:id', deleteSneaker); // Removed '/sneakers' prefix
 
 module.exports = router;

@@ -2,6 +2,16 @@ const mongoose = require('mongoose');
 const Category = require('../models/category'); // Importing the Category model
 
 // GET all categories
+/**
+ * @swagger
+ * /api/categories:
+ *   get:
+ *     summary: Get all categories
+ *     tags: [Categories]
+ *     responses:
+ *       200:
+ *         description: A list of categories
+ */
 const getAllCategories = async (req, res) => {
     try {
         const categories = await Category.find();
@@ -12,6 +22,23 @@ const getAllCategories = async (req, res) => {
 };
 
 // GET a single category by ID
+/**
+ * @swagger
+ * /api/categories/{id}:
+ *   get:
+ *     summary: Get a category by ID
+ *     tags: [Categories]
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: ID of the category to retrieve
+ *     responses:
+ *       200:
+ *         description: Category found
+ *       404:
+ *         description: Category not found
+ */
 const getCategoryById = async (req, res) => {
     try {
         const categoryId = new mongoose.Types.ObjectId(req.params.id); // Convert to ObjectId
@@ -24,6 +51,29 @@ const getCategoryById = async (req, res) => {
 };
 
 // POST a new category
+/**
+ * @swagger
+ * /api/categories:
+ *   post:
+ *     summary: Create a new category
+ *     tags: [Categories]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *               description:
+ *                 type: string
+ *     responses:
+ *       201:
+ *         description: Category created
+ *       400:
+ *         description: Invalid input
+ */
 const createCategory = async (req, res) => {
     const category = new Category(req.body);
     try {
@@ -35,6 +85,34 @@ const createCategory = async (req, res) => {
 };
 
 // PUT to update a category by ID
+/**
+ * @swagger
+ * /api/categories/{id}:
+ *   put:
+ *     summary: Update a category by ID
+ *     tags: [Categories]
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: ID of the category to update
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *               description:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Category updated
+ *       404:
+ *         description: Category not found
+ */
 const updateCategory = async (req, res) => {
     try {
         const categoryId = new mongoose.Types.ObjectId(req.params.id); // Convert to ObjectId
@@ -47,6 +125,23 @@ const updateCategory = async (req, res) => {
 };
 
 // DELETE a category by ID
+/**
+ * @swagger
+ * /api/categories/{id}:
+ *   delete:
+ *     summary: Delete a category by ID
+ *     tags: [Categories]
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: ID of the category to delete
+ *     responses:
+ *       204:
+ *         description: Category deleted
+ *       404:
+ *         description: Category not found
+ */
 const deleteCategory = async (req, res) => {
     try {
         const categoryId = new mongoose.Types.ObjectId(req.params.id); // Convert to ObjectId

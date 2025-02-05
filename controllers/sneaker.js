@@ -6,7 +6,7 @@ const getAllSneakers = async (req, res) => {
     try {
         const sneakers = await Sneaker.find();
         const formattedSneakers = sneakers.map(sneaker => ({
-            _id: sneaker._id, // Include the _id field
+            _id: sneaker._id,
             name: sneaker.name,
             brand: sneaker.brand,
             category_id: sneaker.category_id,
@@ -14,7 +14,6 @@ const getAllSneakers = async (req, res) => {
             stock: sneaker.stock
         }));
         res.status(200).json(formattedSneakers);
-
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
@@ -22,7 +21,7 @@ const getAllSneakers = async (req, res) => {
 
 /**
  * @swagger
- * /api/sneaker:
+ * /api/sneakers:
  *   get:
  *     summary: Get all sneakers
  *     tags: [Sneakers]
@@ -32,7 +31,13 @@ const getAllSneakers = async (req, res) => {
  */
 const getSneakerById = async (req, res) => {
     try {
-        const sneakerId = mongoose.Types.ObjectId(req.params.id); // Convert to ObjectId
+        const sneakerId = req.params.id;
+
+        // Check if the ID is a valid ObjectId
+        if (!mongoose.Types.ObjectId.isValid(sneakerId)) {
+            return res.status(400).json({ message: 'Invalid ID format' });
+        }
+
         const sneaker = await Sneaker.findById(sneakerId);
         if (!sneaker) return res.status(404).json({ message: 'Sneaker not found' });
         res.status(200).json(sneaker);
@@ -43,7 +48,7 @@ const getSneakerById = async (req, res) => {
 
 /**
  * @swagger
- * /api/sneaker:
+ * /api/sneakers:
  *   post:
  *     summary: Create a new sneaker
  *     tags: [Sneakers]
@@ -63,7 +68,7 @@ const createSneaker = async (req, res) => {
 
 /**
  * @swagger
- * /api/sneaker/{id}:
+ * /api/sneakers/{id}:
  *   put:
  *     summary: Update a sneaker by ID
  *     tags: [Sneakers]
@@ -80,10 +85,16 @@ const createSneaker = async (req, res) => {
  */
 const updateSneaker = async (req, res) => {
     try {
-        const sneakerId = mongoose.Types.ObjectId(req.params.id); // Convert to ObjectId
+        const sneakerId = req.params.id;
+
+        // Check if the ID is a valid ObjectId
+        if (!mongoose.Types.ObjectId.isValid(sneakerId)) {
+            return res.status(400).json({ message: 'Invalid ID format' });
+        }
+
         const updatedSneaker = await Sneaker.findByIdAndUpdate(sneakerId, req.body, { new: true });
         if (!updatedSneaker) return res.status(404).json({ message: 'Sneaker not found' });
-        res.status(200).json(updatedSneaker);
+        res.status(200).json(updatedSneaker );
     } catch (error) {
         res.status(400).json({ message: error.message });
     }
@@ -91,7 +102,7 @@ const updateSneaker = async (req, res) => {
 
 /**
  * @swagger
- * /api/sneaker/{id}:
+ * /api/sneakers/{id}:
  *   delete:
  *     summary: Delete a sneaker by ID
  *     tags: [Sneakers]
@@ -108,7 +119,13 @@ const updateSneaker = async (req, res) => {
  */
 const deleteSneaker = async (req, res) => {
     try {
-        const sneakerId = mongoose.Types.ObjectId(req.params.id); // Convert to ObjectId
+        const sneakerId = req.params.id;
+
+        // Check if the ID is a valid ObjectId
+        if (!mongoose.Types.ObjectId.isValid(sneakerId)) {
+            return res.status(400).json({ message: 'Invalid ID format' });
+        }
+
         const deletedSneaker = await Sneaker.findByIdAndDelete(sneakerId);
         if (!deletedSneaker) return res.status(404).json({ message: 'Sneaker not found' });
         res.status(204).send();
