@@ -7,9 +7,11 @@ const getAllOrders = async (req, res) => {
         const orders = await Order.find();
         res.status(200).json(orders);
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        console.error("❌ Error fetching orders:", error); // Log the error
+        res.status(500).json({ message: "Server error", error: error.message });
     }
 };
+
 
 /**
  * @swagger
@@ -23,14 +25,20 @@ const getAllOrders = async (req, res) => {
  */
 const getOrderById = async (req, res) => {
     try {
-        const orderId = mongoose.Types.ObjectId(req.params.id); // Convert to ObjectId
-        const order = await Order.findById(orderId);
+        if (!mongoose.isValidObjectId(req.params.id)) {
+            return res.status(400).json({ message: "Invalid ID format" });
+        }
+
+        const order = await Order.findById(req.params.id);
         if (!order) return res.status(404).json({ message: 'Order not found' });
+
         res.status(200).json(order);
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        console.error("❌ Error fetching order by ID:", error);
+        res.status(500).json({ message: "Server error", error: error.message });
     }
 };
+
 
 /**
  * @swagger
@@ -43,14 +51,21 @@ const getOrderById = async (req, res) => {
  *         description: Order created
  */
 const createOrder = async (req, res) => {
-    const order = new Order(req.body);
     try {
-        const savedOrder = await order.save();
+        const { user_id, sneaker_id, quantity, total_price } = req.body;
+        if (!user_id || !sneaker_id || !quantity || !total_price) {
+            return res.status(400).json({ message: "Missing required fields" });
+        }
+
+        const newOrder = new Order(req.body);
+        const savedOrder = await newOrder.save();
         res.status(201).json(savedOrder);
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        console.error("❌ Error creating order:", error);
+        res.status(400).json({ message: "Error creating order", error: error.message });
     }
 };
+
 
 /**
  * @swagger
@@ -71,14 +86,20 @@ const createOrder = async (req, res) => {
  */
 const updateOrder = async (req, res) => {
     try {
-        const orderId = mongoose.Types.ObjectId(req.params.id); // Convert to ObjectId
-        const updatedOrder = await Order.findByIdAndUpdate(orderId, req.body, { new: true });
+        if (!mongoose.isValidObjectId(req.params.id)) {
+            return res.status(400).json({ message: "Invalid ID format" });
+        }
+
+        const updatedOrder = await Order.findByIdAndUpdate(req.params.id, req.body, { new: true });
         if (!updatedOrder) return res.status(404).json({ message: 'Order not found' });
+
         res.status(200).json(updatedOrder);
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        console.error("❌ Error updating order:", error);
+        res.status(400).json({ message: "Error updating order", error: error.message });
     }
 };
+
 
 /**
  * @swagger
@@ -99,14 +120,20 @@ const updateOrder = async (req, res) => {
  */
 const deleteOrder = async (req, res) => {
     try {
-        const orderId = mongoose.Types.ObjectId(req.params.id); // Convert to ObjectId
-        const deletedOrder = await Order.findByIdAndDelete(orderId);
+        if (!mongoose.isValidObjectId(req.params.id)) {
+            return res.status(400).json({ message: "Invalid ID format" });
+        }
+
+        const deletedOrder = await Order.findByIdAndDelete(req.params.id);
         if (!deletedOrder) return res.status(404).json({ message: 'Order not found' });
+
         res.status(204).send();
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        console.error("❌ Error deleting order:", error);
+        res.status(500).json({ message: "Server error", error: error.message });
     }
 };
+
 
 module.exports = {
     getAllOrders,

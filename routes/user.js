@@ -25,8 +25,8 @@ const userController = require('../controllers/user');
  *               items:
  *                 type: object
  *                 properties:
- *                   _id:
- *                     type: string
+ *                   id:
+ *                     type: integer
  *                     description: The user ID
  *                   name:
  *                     type: string
@@ -93,7 +93,7 @@ const userController = require('../controllers/user');
  *             schema:
  *               type: object
  *               properties:
- *                 _id:
+ *                 id:
  *                   type: integer
  *                 name:
  *                   type: string

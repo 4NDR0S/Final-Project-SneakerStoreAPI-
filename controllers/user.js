@@ -22,7 +22,7 @@ const getAllUsers = async (req, res) => {
 
 /**
  * @swagger
- * /api/user:
+ * /api/users:
  *   get:
  *     summary: Get all users
  *     tags: [Users]
@@ -50,7 +50,7 @@ const getUserById = async (req, res) => {
 
 /**
  * @swagger
- * /api/user:
+ * /api/users:
  *   post:
  *     summary: Create a new user
  *     tags: [Users]
@@ -71,7 +71,7 @@ const createUser = async (req, res) => {
 
 /**
  * @swagger
- * /api/user/{id}:
+ * /api/users/{id}:
  *   put:
  *     summary: Update a user by ID
  *     tags: [Users]
@@ -99,7 +99,7 @@ const updateUser = async (req, res) => {
 
 /**
  * @swagger
- * /api/user/{id}:
+ * /api/users/{id}:
  *   delete:
  *     summary: Delete a user by ID
  *     tags: [Users]
