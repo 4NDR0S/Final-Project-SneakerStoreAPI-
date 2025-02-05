@@ -91,9 +91,9 @@ const {
  */
 
 router.get('/', getAllSneakers);
-router.get('/:id', getSneakerById);
+router.get('/sneakers/:id', getSneakerById);
 router.post('/', createSneaker);
-router.put('/:id', updateSneaker);
-router.delete('/:id', deleteSneaker);
+router.put('/sneakers/:id', updateSneaker);
+router.delete('/sneakers/:id', deleteSneaker);
 
 module.exports = router;

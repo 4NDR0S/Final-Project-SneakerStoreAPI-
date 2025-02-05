@@ -91,9 +91,9 @@ const {
  */
 
 router.get('/', getAllOrders);
-router.get('/:id', getOrderById);
+router.get('/orders/:id', getOrderById);
 router.post('/', createOrder);
-router.put('/:id', updateOrder);
-router.delete('/:id', deleteOrder);
+router.put('/orders/:id', updateOrder);
+router.delete('/orders/:id', deleteOrder);
 
 module.exports = router;

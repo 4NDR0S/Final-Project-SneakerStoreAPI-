@@ -38,7 +38,7 @@ router.get('/', getAllCategories);
  *       404:
  *         description: Category not found
  */
-router.get('/:id', getCategoryById);
+router.get('/categories/:id', getCategoryById);
 
 
 /**
@@ -99,7 +99,7 @@ router.post('/', createCategory);
  *       404:
  *         description: Category not found
  */
-router.put('/:id', updateCategory);
+router.put('/categories/:id', updateCategory);
 
 
 /**
@@ -119,7 +119,7 @@ router.put('/:id', updateCategory);
  *       404:
  *         description: Category not found
  */
-router.delete('/:id', deleteCategory);
+router.delete('/categories/:id', deleteCategory);
 
 
 module.exports = router;

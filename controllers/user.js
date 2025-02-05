@@ -32,9 +32,14 @@ const getAllUsers = async (req, res) => {
  */
 const getUserById = async (req, res) => {
     console.log('getUserById called'); // Log when the function is called
-    
+    const userId = req.params.id;
+
+    if (!ObjectId.isValid(userId)) {
+        return res.status(400).json({ message: 'Invalid ID format' });
+    }
+
     try {
-        const user = await User.find({}, { _id: 1, name: 1, email: 1, address: 1, phone: 1 });
+        const user = await User.findById(userId);
 
         if (!user) return res.status(404).json({ message: 'User not found' });
         res.status(200).json(user);
