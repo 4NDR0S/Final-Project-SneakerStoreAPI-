@@ -1,32 +1,42 @@
+require('dotenv').config(); // Load environment variables
 const express = require('express');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 const mongodb = require('./data/database');
+const categoriesRoutes = require('./routes/categories');
+const ordersRoutes = require('./routes/order');
+const sneakersRoutes = require('./routes/sneaker');
+const usersRoutes = require('./routes/user');
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocs = require('./swagger'); // Swagger documentation
 
 const app = express();
 const port = process.env.PORT || 3000;
 
-app.use(express.json());
-
 // Middleware
-app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Request-with, Content-Type, Accept, Z-Key');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-    next();
+app.use(cors()); // Enable CORS for all routes
+app.use(bodyParser.json());
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs)); // Swagger UI
+
+// Routes
+app.use('/api/categories', categoriesRoutes);
+app.use('/api/orders', ordersRoutes);
+app.use('/api/sneakers', sneakersRoutes);
+app.use('/api/users', usersRoutes);
+
+// Handle 404 for unknown routes
+app.use((req, res) => {
+    res.status(404).json({ error: "Route not found" });
 });
 
-// Ruta de prueba
-app.get('/', (req, res) => {
-    res.send("Final Project(SneakerStoreAPI) is online.");
-});
-
-// Conect to MongoDB and run server
+// Connect to MongoDB and start the server
 mongodb.initDb((err) => {
     if (err) {
-        console.log(err);
+        console.error("❌ MongoDB connection failed:", err);
+        process.exit(1); // Exit process if DB connection fails
     } else {
         app.listen(port, () => {
-            console.log(`Server runing on port: ${port}`);
+            console.log(`✅ Server is running on http://localhost:${port}`);
         });
     }
 });
