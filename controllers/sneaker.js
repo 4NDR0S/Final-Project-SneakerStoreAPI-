@@ -52,10 +52,33 @@ const getSneakerById = async (req, res) => {
  *   post:
  *     summary: Create a new sneaker
  *     tags: [Sneakers]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *                 example: "Salomon X Ultra 4 GTX"
+ *               brand:
+ *                 type: string
+ *                 example: "Salomon"
+ *               category_id:
+ *                 type: integer
+ *                 example: 5
+ *               price:
+ *                 type: number
+ *                 example: 150
+ *               stock:
+ *                 type: integer
+ *                 example: 20
  *     responses:
  *       201:
  *         description: Sneaker created
  */
+
 const createSneaker = async (req, res) => {
     const sneaker = new Sneaker(req.body);
     try {

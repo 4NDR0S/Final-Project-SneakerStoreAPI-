@@ -72,14 +72,19 @@ const getOrderById = async (req, res) => {
  *             properties:
  *               user_id:
  *                 type: integer
+ *                 example: 3
  *               sneaker_id:
  *                 type: integer
+ *                 example: 5
  *               quantity:
  *                 type: integer
+ *                 example: 3
  *               total_price:
  *                 type: number
+ *                 example: 210
  *               status:
  *                 type: string
+ *                 example: "Processing"
  *     responses:
  *       201:
  *         description: Order created
