@@ -7,6 +7,7 @@ const {
     updateCategory,
     deleteCategory
 } = require('../controllers/categories');
+const { isAuthenticated }  = require('../middleware/authenticate');
 
 /**
  * @swagger
@@ -65,7 +66,7 @@ router.get('/:id', getCategoryById);
  *       201:
  *         description: Category created
  */
-router.post('/', createCategory);
+router.post('/', isAuthenticated, createCategory);
 
 
 /**
@@ -99,7 +100,7 @@ router.post('/', createCategory);
  *       404:
  *         description: Category not found
  */
-router.put('/:id', updateCategory);
+router.put('/:id', isAuthenticated, updateCategory);
 
 
 /**
@@ -119,7 +120,7 @@ router.put('/:id', updateCategory);
  *       404:
  *         description: Category not found
  */
-router.delete('/:id', deleteCategory);
+router.delete('/:id', isAuthenticated, deleteCategory);
 
 
 module.exports = router;

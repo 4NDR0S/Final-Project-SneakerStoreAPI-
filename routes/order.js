@@ -7,6 +7,7 @@ const {
     updateOrder,
     deleteOrder
 } = require('../controllers/order');
+const { isAuthenticated }  = require('../middleware/authenticate');
 
 /**
  * @swagger
@@ -126,8 +127,8 @@ const {
 
 router.get('/', getAllOrders);
 router.get('/:id', getOrderById);
-router.post('/', createOrder);
-router.put('/:id', updateOrder);
-router.delete('/:id', deleteOrder);
+router.post('/', isAuthenticated, createOrder);
+router.put('/:id', isAuthenticated, updateOrder);
+router.delete('/:id', isAuthenticated, deleteOrder);
 
 module.exports = router;
