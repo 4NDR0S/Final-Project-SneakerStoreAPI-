@@ -7,7 +7,7 @@ const {
     updateSneaker,
     deleteSneaker
 } = require('../controllers/sneaker');
-const isAuthenticated = require('../middleware/authenticate');
+const { isAuthenticated }  = require('../middleware/authenticate');
 
 /**
  * @swagger
@@ -129,8 +129,8 @@ const isAuthenticated = require('../middleware/authenticate');
 //router.get('/', getAllSneakers);
 router.get('/', getAllSneakers);
 router.get('/:id', getSneakerById); // Removed '/sneakers' prefix
-router.post('/', createSneaker);
-router.put('/:id', updateSneaker); // Removed '/sneakers' prefix
-router.delete('/:id', deleteSneaker); // Removed '/sneakers' prefix
+router.post('/', isAuthenticated, createSneaker);
+router.put('/:id', isAuthenticated, updateSneaker); // Removed '/sneakers' prefix
+router.delete('/:id', isAuthenticated, deleteSneaker); // Removed '/sneakers' prefix
 
 module.exports = router;

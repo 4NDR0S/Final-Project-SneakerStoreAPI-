@@ -43,10 +43,14 @@ app
     .use(cors({ methods: ['GET','POST','DELETE','UPDATE','PUT','PATCH']}))
     .use(cors({ origin: '*' }))     
     .use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs)) // Swagger UI
-    .use('/api/categories', categoriesRoutes)
-    .use('/api/orders', ordersRoutes)
-    .use('/api/sneakers', sneakersRoutes)
-    .use('/api/users', usersRoutes);
+    // .use('/api/categories', categoriesRoutes)
+    // .use('/api/orders', ordersRoutes)
+    // .use('/api/sneakers', sneakersRoutes)
+    // .use('/api/users', usersRoutes)
+    // .use((req, res) => {
+    //     res.status(404).json({ error: "Route not found" });
+    // });
+
 
 passport.use(new GitHubStrategy({
     clientID: process.env.GITHUB_CLIENT_ID,
@@ -77,15 +81,24 @@ app.get('/github/callback', passport.authenticate('github', {
         res.redirect('/');
     });
 
+app.get('/login', passport.authenticate('github', (req, res) => {}));
 
+app.get('/logout', function(req, res, next) {
 
-// Routes
-// app.use('/api/categories', categoriesRoutes);
-// app.use('/api/orders', ordersRoutes);
-// app.use('/api/sneakers', sneakersRoutes);
-// app.use('/api/users', usersRoutes);
+    req.logout(function(err){
+        if(err) { return next(err); }
+        res.redirect('/');
+    });
 
-// Handle 404 for unknown routes
+});
+
+//Routes
+app.use('/api/categories', categoriesRoutes);
+app.use('/api/orders', ordersRoutes);
+app.use('/api/sneakers', sneakersRoutes);
+app.use('/api/users', usersRoutes);
+
+//Handle 404 for unknown routes
 app.use((req, res) => {
     res.status(404).json({ error: "Route not found" });
 });
