@@ -32,6 +32,23 @@ const {
  *   post:
  *     summary: Create a new order
  *     tags: [Orders]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               user_id:
+ *                 type: number
+ *               sneaker_id:
+ *                 type: number
+ *               quantity:
+ *                 type: number
+ *               total_price:
+ *                 type: number
+ *               status:
+ *                 type: string 
  *     responses:
  *       201:
  *         description: Order created
@@ -65,6 +82,23 @@ const {
  *         in: path
  *         required: true
  *         description: ID of the order to update
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               user_id:
+ *                 type: number
+ *               sneaker_id:
+ *                 type: number
+ *               quantity:
+ *                 type: number
+ *               total_price:
+ *                 type: number
+ *               status:
+ *                 type: string 
  *     responses:
  *       200:
  *         description: Order updated

@@ -21,7 +21,11 @@
     "mongoose": "^8.9.6",
     "passport": "^0.7.0",
     "passport-github": "^1.1.0",
+    "supertest": "^7.0.0",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
   }
 }
