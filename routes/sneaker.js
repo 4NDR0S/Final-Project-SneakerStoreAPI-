@@ -7,6 +7,7 @@ const {
     updateSneaker,
     deleteSneaker
 } = require('../controllers/sneaker');
+const isAuthenticated = require('../middleware/authenticate');
 
 /**
  * @swagger
@@ -32,6 +33,23 @@ const {
  *   post:
  *     summary: Create a new sneaker
  *     tags: [Sneakers]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *               brand:
+ *                 type: string
+ *               category_id:
+ *                 type: string
+ *               price:
+ *                 type: string
+ *               stock:
+ *                 type: string 
  *     responses:
  *       201:
  *         description: Sneaker created
@@ -65,6 +83,23 @@ const {
  *         in: path
  *         required: true
  *         description: ID of the sneaker to update
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *               brand:
+ *                 type: string
+ *               category_id:
+ *                 type: string
+ *               price:
+ *                 type: string
+ *               stock:
+ *                 type: string 
  *     responses:
  *       200:
  *         description: Sneaker updated
@@ -91,6 +126,7 @@ const {
  */
 
 // Corrected routes
+//router.get('/', getAllSneakers);
 router.get('/', getAllSneakers);
 router.get('/:id', getSneakerById); // Removed '/sneakers' prefix
 router.post('/', createSneaker);

@@ -9,20 +9,81 @@ const sneakersRoutes = require('./routes/sneaker');
 const usersRoutes = require('./routes/user');
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocs = require('./swagger'); // Swagger documentation
+const passport = require('passport');
+const session = require('express-session');
+const GitHubStrategy = require('passport-github').Strategy;
 
 const app = express();
 const port = process.env.PORT || 3000;
 
 // Middleware
 app.use(cors()); // Enable CORS for all routes
-app.use(bodyParser.json());
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs)); // Swagger UI
+app
+    // basic express session initialization
+    .use(bodyParser.json())
+    .use(session({
+        secret: "secret",
+        resave: false,
+        saveUninitialized: true,
+    }))
+    .use(passport.initialize()) // init session in every route
+    .use(passport.session()) // allow passwport to use "express-session"
+    .use((req, res, next) => {
+        res.setHeader("Access-Control-Allow-Origin","*")
+        res.setHeader(
+            "Access-Control-Allow-Headers",
+            "Origin, X-Requested-With, Content-Type, Accept, Z-key, Authorization"
+        )
+        res.setHeader(
+            "Access-Control-Allow-Methods",
+            "POST, GET, PUT, PATCH, OPTIONS, DELETE"
+        )
+        next()
+    })
+    .use(cors({ methods: ['GET','POST','DELETE','UPDATE','PUT','PATCH']}))
+    .use(cors({ origin: '*' }))     
+    .use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs)) // Swagger UI
+    .use('/api/categories', categoriesRoutes)
+    .use('/api/orders', ordersRoutes)
+    .use('/api/sneakers', sneakersRoutes)
+    .use('/api/users', usersRoutes);
+
+passport.use(new GitHubStrategy({
+    clientID: process.env.GITHUB_CLIENT_ID,
+    clientSecret: process.env.GITHUB_CLIENT_SECRET,
+    callbackURL: process.env.GITHUB_CALLBACK_URL
+}, 
+function(accessToken, refreshToken, profile, done){
+    //User.findOrCreate({ githubId: profile.id }, function( err, user) {
+    return done(null, profile)
+    //});
+}));
+
+passport.serializeUser((user, done) => {
+    done(null, user);
+});
+
+passport.deserializeUser((user, done) => {
+    done(null, user);
+});
+
+app.get('/', (req, res) => { res.send(req.session.user !== undefined ? `Logged in as ${req.session.user.displayName}` : "Logged Out" )});
+
+app.get('/github/callback', passport.authenticate('github', {
+        failureRedirect: '/api-docs', session: false
+    }),
+    (req, res)=>{
+        req.session.user = req.user;
+        res.redirect('/');
+    });
+
+
 
 // Routes
-app.use('/api/categories', categoriesRoutes);
-app.use('/api/orders', ordersRoutes);
-app.use('/api/sneakers', sneakersRoutes);
-app.use('/api/users', usersRoutes);
+// app.use('/api/categories', categoriesRoutes);
+// app.use('/api/orders', ordersRoutes);
+// app.use('/api/sneakers', sneakersRoutes);
+// app.use('/api/users', usersRoutes);
 
 // Handle 404 for unknown routes
 app.use((req, res) => {
