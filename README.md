@@ -1,4 +1,5 @@
 🛍️ SneakerStoreAPI
+
 📌 Descripción
 API RESTful para la gestión de una tienda de zapatillas, permitiendo operaciones como la creación de productos, gestión de categorías, órdenes de compra y usuarios.​
 
